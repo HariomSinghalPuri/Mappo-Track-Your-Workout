@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="icon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <script defer src="script.js"></script>
+    <title>Mappo // Track Your Workouts</title>
+  </head>
+  <body>
+    <div class="map-controls">
+  <button class="btn btn--locate" title="Locate me">
+    <i class="fas fa-location-arrow"></i>
+  </button>
+  <button class="btn btn--show-all" title="Show all workouts">
+    <i class="fas fa-layer-group"></i>
+  </button>
+</div>
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <img src="logo.png" alt="Logo" class="logo" />
+        <div class="app-controls">
+          <button class="btn btn--import" title="Import Workouts">
+            <i class="fas fa-file-import"></i>
+          </button>
+          <button class="btn btn--export" title="Export Workouts">
+            <i class="fas fa-file-export"></i>
+          </button>
+          <button class="btn btn--reset" title="Reset All">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="stats-container">
+        <div class="stats">
+          <h3 class="stats__title">
+            <i class="fas fa-chart-line"></i> Your Stats
+          </h3>
+          <div class="stats__grid"></div>
+        </div>
+      </div>
+
+      <div class="sort-controls">
+        <div class="sort-controls__header">
+          <i class="fas fa-sort"></i>
+          <h3>Sort Workouts</h3>
+        </div>
+        <select id="sort-by" class="sort-select">
+          <option value="date-newest">Date (Newest First)</option>
+          <option value="date-oldest">Date (Oldest First)</option>
+          <option value="distance-high">Distance (High to Low)</option>
+          <option value="distance-low">Distance (Low to High)</option>
+          <option value="duration-long">Duration (Long to Short)</option>
+          <option value="duration-short">Duration (Short to Long)</option>
+        </select>
+      </div>
+
+      <div class="workouts-container">
+        <ul class="workouts"></ul>
+      </div>
+
+      <form class="form hidden">
+        <div class="form__header">
+          <h3>Add New Workout</h3>
+          <button type="button" class="btn btn--close-form">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="form__row">
+          <label class="form__label">Type</label>
+          <select class="form__input form__input--type">
+            <option value="running">Running</option>
+            <option value="cycling">Cycling</option>
+            <option value="swimming">Swimming</option>
+            <option value="hiking">Hiking</option>
+          </select>
+        </div>
+        <div class="form__row">
+          <label class="form__label">Distance</label>
+          <input class="form__input form__input--distance" placeholder="km" />
+        </div>
+        <div class="form__row">
+          <label class="form__label">Duration</label>
+          <input class="form__input form__input--duration" placeholder="min" />
+        </div>
+        <div class="form__row">
+          <label class="form__label">Cadence</label>
+          <input
+            class="form__input form__input--cadence"
+            placeholder="step/min"
+          />
+        </div>
+        <div class="form__row form__row--hidden">
+          <label class="form__label">Elev Gain</label>
+          <input
+            class="form__input form__input--elevation"
+            placeholder="meters"
+          />
+        </div>
+        <div class="form__row form__row--hidden">
+          <label class="form__label">Strokes</label>
+          <input
+            class="form__input form__input--strokes"
+            placeholder="strokes/min"
+          />
+        </div>
+        <button class="btn btn--submit">Save Workout</button>
+      </form>
+
+      <p class="copyright">
+        Made with <i class="fas fa-heart"></i> by Hariom Singhal Puri
+      </p>
+<div class="social-links">
+  <a href="https://github.com/HariomSinghalPuri" target="_blank" class="social-link" title="GitHub">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="https://www.instagram.com/singhalpuri07?igsh=z3l5egp2ehi0m24x" target="_blank" class="social-link" title="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://m.facebook.com/H.Singhalpuri/" target="_blank" class="social-link" title="Facebook">
+    <i class="fab fa-facebook"></i>
+  </a>
+  <a href="mailto:www.singhalpuri@gmail.com.com" class="social-link" title="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</div>
+    </div>
+
+    <div id="map"></div>
+    <div class="map-controls">
+      <button class="btn btn--locate">
+        <i class="fas fa-location-arrow"></i>
+      </button>
+      <button class="btn btn--show-all">
+        <i class="fas fa-layer-group"></i>
+      </button>
+    </div>
+
+    <input type="file" id="import-file" class="hidden" accept=".json" />
+  </body>
+</html>

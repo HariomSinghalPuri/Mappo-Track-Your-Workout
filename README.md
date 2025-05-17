@@ -4,7 +4,7 @@
 _Made with ♥ by Hariom Singhal Puri_
 
 ---
-## Visit 😎 [Mappo]([[https://pages.github.com](https://hariomsinghalpuri.github.io/Mappo-Track-Your-Workout/)]
+## Visit 😎 [Mappo]([https://hariomsinghalpuri.github.io/Mappo-Track-Your-Workout/])
 
 ---
 

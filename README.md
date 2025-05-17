@@ -30,12 +30,12 @@ _Made with ♥ by Hariom Singhal Puri_
 ---
 
 ## 📸 Screenshots
-
-> _
+![Screenshot 2025-05-17 180205](https://github.com/user-attachments/assets/19bc3d00-8182-4250-a773-10a8d87ac717)
 
 ---
 
-## 🏁 Getting Started
+
+## 🏁 Getting Started 
 
 ### 1. Clone the Repository
 
